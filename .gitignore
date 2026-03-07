@@ -1,0 +1,43 @@
+# IntelliJ IDEA
+
+.idea/
+*.iml
+*.iws
+out/
+
+# Java compiled files
+
+*.class
+
+# Logs
+
+*.log
+
+# Maven
+
+target/
+
+# Gradle
+
+.gradle/
+build/
+
+# Package files
+
+*.jar
+*.war
+*.ear
+
+# OS files
+
+.DS_Store
+Thumbs.db
+
+# Environment files
+
+.env
+
+# Temporary files
+
+*.tmp
+*.swp
