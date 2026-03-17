@@ -1,8 +1,6 @@
 package com.app.quickFund.services;
 
-import com.app.quickFund.dto.BankAccountDto;
 import com.app.quickFund.dto.LedgerEntryDto;
-import com.app.quickFund.dto.TransactionDto;
 import com.app.quickFund.entities.BankAccountEntity;
 import com.app.quickFund.entities.LedgerEntryEntity;
 import com.app.quickFund.entities.TransactionEntity;
@@ -11,7 +9,6 @@ import com.app.quickFund.exception.custom.CustomException;
 import com.app.quickFund.repositories.LedgerEntryRepository;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;

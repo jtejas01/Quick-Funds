@@ -6,17 +6,18 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
+
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class LedgerEntryDto {
-
+public class UserResponseDto {
     private Long id;
-    private TransactionResponseDto transaction;
-    private BankAccountRequestDto bankAccount;
-    private Double amount;
-
-    private Double balanceAfterTransaction;
+    private String firstName;
+    private String lastName;
+    private String email;
+    private String phone;
+    private boolean kycStatus;
     private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
 }

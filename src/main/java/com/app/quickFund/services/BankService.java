@@ -1,14 +1,15 @@
 package com.app.quickFund.services;
 
-import com.app.quickFund.dto.BankDto;
+import com.app.quickFund.dto.BankRequestDto;
+import com.app.quickFund.dto.BankResponseDto;
 
 import java.util.List;
 
 public interface BankService {
 
-    BankDto createBank(BankDto bank);
-    BankDto getBankById(Long bankId);
-    List<BankDto> getAllBanks();
-    BankDto updateBank(BankDto bankDto,Long bankId);
+    BankResponseDto createBank(BankRequestDto bank);
+    BankResponseDto getBankById(Long bankId);
+    List<BankResponseDto> getAllBanks();
+    BankResponseDto updateBank(BankRequestDto bankRequestDto, Long bankId);
     void deleteBank (Long bankId);
 }

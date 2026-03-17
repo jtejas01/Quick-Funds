@@ -1,14 +1,10 @@
 package com.app.quickFund.services;
 
-import com.app.quickFund.dto.TransactionDto;
+import com.app.quickFund.dto.TransactionResponseDto;
 import com.app.quickFund.dto.TransferRequestDto;
-import com.app.quickFund.entities.BankAccountEntity;
 import com.app.quickFund.entities.TransactionEntity;
-import com.app.quickFund.exception.ErrorCode;
-import com.app.quickFund.exception.custom.CustomException;
 import com.app.quickFund.repositories.TransactionRepository;
 import com.app.quickFund.services.helper.EntityFinderService;
-import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,20 +29,20 @@ public class TransactionServiceImpl implements TransactionService{
     private final EntityFinderService entityFinderService;
 
     @Override
-    public TransactionDto transferMoney(TransferRequestDto requestDto) {
+    public TransactionResponseDto transferMoney(TransferRequestDto requestDto) {
         return paymentService.processTransfer(requestDto);
     }
 
     @Override
-    public TransactionDto getTransactionById(Long transactionId) {
+    public TransactionResponseDto getTransactionById(Long transactionId) {
         TransactionEntity transaction = entityFinderService.getTransactionById(transactionId);
-        return modelMapper.map(transaction,TransactionDto.class);
+        return modelMapper.map(transaction, TransactionResponseDto.class);
     }
 
     @Override
-    public List<TransactionDto> getAlltransactions() {
+    public List<TransactionResponseDto> getAlltransactions() {
         List<TransactionEntity> transactionList = transactionRepository.findAll();
-        return transactionList.stream().map(transaction -> modelMapper.map(transaction,TransactionDto.class)).collect(Collectors.toList());
+        return transactionList.stream().map(transaction -> modelMapper.map(transaction, TransactionResponseDto.class)).collect(Collectors.toList());
     }
 }
 

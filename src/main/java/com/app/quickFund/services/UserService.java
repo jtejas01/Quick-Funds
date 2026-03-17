@@ -1,15 +1,16 @@
 package com.app.quickFund.services;
 
-import com.app.quickFund.dto.UserDto;
+import com.app.quickFund.dto.UserRequestDto;
+import com.app.quickFund.dto.UserResponseDto;
 
 import java.util.List;
 
 public interface UserService {
 
-    UserDto createUser(UserDto userDto);
-    UserDto getById(Long id);
-    UserDto getByPhone(String phone);
-    List<UserDto> gellAllUsers();
-    UserDto updateUser(Long id,UserDto userDto);
+    UserResponseDto createUser(UserRequestDto userRequestDto);
+    UserResponseDto getById(Long id);
+    UserResponseDto getByPhone(String phone);
+    List<UserResponseDto> gellAllUsers();
+    UserResponseDto updateUser(Long id, UserRequestDto userRequestDto);
     void deleteUser(Long id);
 }

@@ -4,6 +4,7 @@ import com.app.quickFund.entities.*;
 import jakarta.transaction.Transaction;
 import org.apache.catalina.User;
 
+
 public interface EntityFinderService {
 
     UserEntity getUserById(Long userId);

@@ -1,9 +1,8 @@
 package com.app.quickFund.services;
 
-import com.app.quickFund.dto.BankDto;
+import com.app.quickFund.dto.BankRequestDto;
+import com.app.quickFund.dto.BankResponseDto;
 import com.app.quickFund.entities.BankEntity;
-import com.app.quickFund.exception.ErrorCode;
-import com.app.quickFund.exception.custom.CustomException;
 import com.app.quickFund.repositories.BankRepository;
 import com.app.quickFund.services.helper.EntityFinderService;
 import lombok.RequiredArgsConstructor;
@@ -11,6 +10,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -24,33 +24,36 @@ public class BankServiceImpl implements BankService{
     @Autowired
     public BankRepository bankRepository;
 
-    private  EntityFinderService entityFinderService;
+    private final EntityFinderService entityFinderService;
     @Override
-    public BankDto createBank(BankDto bank) {
+    public BankResponseDto createBank(BankRequestDto bank) {
         BankEntity bankEntity = modelMapper.map(bank,BankEntity.class);
+        bankEntity.setCreatedAt(LocalDateTime.now());
         BankEntity savedBank = bankRepository.save(bankEntity);
-        return modelMapper.map(savedBank,BankDto.class);
+        return modelMapper.map(savedBank, BankResponseDto.class);
     }
 
     @Override
-    public BankDto getBankById(Long bankId) {
+    public BankResponseDto getBankById(Long bankId) {
         BankEntity bank = entityFinderService.getBankById(bankId);
-        return modelMapper.map(bank,BankDto.class);
+        return modelMapper.map(bank, BankResponseDto.class);
     }
 
     @Override
-    public List<BankDto> getAllBanks() {
+    public List<BankResponseDto> getAllBanks() {
 
         List<BankEntity> bankEntity = bankRepository.findAll();
-        return bankEntity.stream().map(bank -> modelMapper.map(bank,BankDto.class)).collect(Collectors.toList());
+        return bankEntity.stream().map(bank -> modelMapper.map(bank, BankResponseDto.class)).collect(Collectors.toList());
     }
 
     @Override
-    public BankDto updateBank(BankDto bankDto, Long bankId) {
+    public BankResponseDto updateBank(BankRequestDto bankRequestDto, Long bankId) {
         BankEntity existingBank = entityFinderService.getBankById(bankId);
-        modelMapper.map(bankDto,existingBank);
+        modelMapper.map(bankRequestDto,existingBank);
+        existingBank.getCreatedAt();
+        existingBank.setUpdatedAt(LocalDateTime.now());
         BankEntity updatedBank = bankRepository.save(existingBank);
-        return modelMapper.map(updatedBank, BankDto.class);
+        return modelMapper.map(updatedBank, BankResponseDto.class);
     }
 
     @Override

@@ -1,16 +1,14 @@
 package com.app.quickFund.services;
 
-import com.app.quickFund.dto.TransactionDto;
+import com.app.quickFund.dto.TransactionResponseDto;
 import com.app.quickFund.dto.TransferRequestDto;
 import com.app.quickFund.entities.BankAccountEntity;
 import com.app.quickFund.entities.TransactionEntity;
 import com.app.quickFund.entities.TransactionStatus;
 import com.app.quickFund.exception.ErrorCode;
 import com.app.quickFund.exception.custom.CustomException;
-import com.app.quickFund.repositories.BankAccountRepository;
 import com.app.quickFund.repositories.TransactionRepository;
 import com.app.quickFund.services.helper.EntityFinderService;
-import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,7 +36,7 @@ public class PaymentServiceImpl implements PaymentService{
 
     @Override
     @Transactional
-    public TransactionDto processTransfer(TransferRequestDto requestDto) {
+    public TransactionResponseDto processTransfer(TransferRequestDto requestDto) {
 
         BankAccountEntity sender = entityFinderService.getBankAccountById(requestDto.getFromAccountId());
         BankAccountEntity receiver = entityFinderService.getBankAccountById(requestDto.getToAccountId());
@@ -71,6 +69,6 @@ public class PaymentServiceImpl implements PaymentService{
         TransactionEntity savedTransaction = transactionRepository.save(transaction);
 
         ledgerEntryService.createLedgerEntries(savedTransaction,sender,receiver,requestDto.getAmount());
-        return modelMapper.map(savedTransaction,TransactionDto.class);
+        return modelMapper.map(savedTransaction, TransactionResponseDto.class);
     }
 }

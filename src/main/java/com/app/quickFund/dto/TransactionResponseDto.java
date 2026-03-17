@@ -16,16 +16,16 @@ import java.util.UUID;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class TransactionDto {
+public class TransactionResponseDto {
 
         private Long id;
         private UUID transactionRef;
         private BigDecimal amount;
         private TransctionType transactionType;
         private TransactionStatus transactionStatus;
-        private UserDto user;
-        private BankAccountDto fromAccount;
-        private BankAccountDto toAccount;
+        private UserResponseDto user;
+        private BankAccountRequestDto fromAccount;
+        private BankAccountRequestDto toAccount;
 
         private LocalDateTime initiatedAt;
         private LocalDateTime completedAt;

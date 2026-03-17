@@ -1,9 +1,6 @@
 package com.app.quickFund.dto;
 
 import com.app.quickFund.entities.Role;
-import jakarta.persistence.Column;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
@@ -17,8 +14,7 @@ import java.time.LocalDateTime;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class UserDto {
-    private Long id;
+public class UserRequestDto {
     private String firstName;
     private String lastName;
 
@@ -27,10 +23,7 @@ public class UserDto {
 
     @Pattern(regexp = "^\\d{10}$", message = "Phone number must be 10 digits")
     private String phone;
-    private String password;
-    private Role role;
-    private boolean kycStatus;
 
-    private LocalDateTime createdAt;
-    private LocalDateTime updatedAt;
+    private String password;
+
 }

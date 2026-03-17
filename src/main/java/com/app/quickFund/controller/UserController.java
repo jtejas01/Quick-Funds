@@ -1,6 +1,7 @@
 package com.app.quickFund.controller;
 
-import com.app.quickFund.dto.UserDto;
+import com.app.quickFund.dto.UserRequestDto;
+import com.app.quickFund.dto.UserResponseDto;
 import com.app.quickFund.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,28 +18,28 @@ public class UserController {
     public UserService userService;
 
     @PostMapping("/create")
-    public ResponseEntity<UserDto> createUser(@RequestBody UserDto userDto){
-        UserDto userResponse = userService.createUser(userDto);
+    public ResponseEntity<UserResponseDto> createUser(@RequestBody UserRequestDto userRequestDto){
+        UserResponseDto userResponse = userService.createUser(userRequestDto);
         return new ResponseEntity<>(userResponse, HttpStatus.CREATED);
     }
     @GetMapping("/userid/{id}")
-    public ResponseEntity<UserDto> getUserById(@PathVariable Long id){
-        UserDto findUserById = userService.getById(id);
+    public ResponseEntity<UserResponseDto> getUserById(@PathVariable Long id){
+        UserResponseDto findUserById = userService.getById(id);
         return ResponseEntity.ok(findUserById);
     }
     @GetMapping("/phone/{phone}")
-    public ResponseEntity<UserDto> getUserByPhone(@PathVariable String phone){
-        UserDto getUserByPhone = userService.getByPhone(phone);
+    public ResponseEntity<UserResponseDto> getUserByPhone(@PathVariable String phone){
+        UserResponseDto getUserByPhone = userService.getByPhone(phone);
         return ResponseEntity.ok(getUserByPhone);
     }
     @GetMapping
-    public ResponseEntity<List<UserDto>> getAllUsers(){
-         List<UserDto> allUsers = userService.gellAllUsers();
+    public ResponseEntity<List<UserResponseDto>> getAllUsers(){
+         List<UserResponseDto> allUsers = userService.gellAllUsers();
          return ResponseEntity.ok(allUsers);
     }
     @PutMapping("/{id}")
-    public ResponseEntity<UserDto> updateUser(@PathVariable Long id,@RequestBody UserDto userDto){
-        UserDto updatedUser = userService.updateUser(id,userDto);
+    public ResponseEntity<UserResponseDto> updateUser(@PathVariable Long id, @RequestBody UserRequestDto userRequestDto){
+        UserResponseDto updatedUser = userService.updateUser(id, userRequestDto);
         return ResponseEntity.ok(updatedUser);
     }
     @DeleteMapping("/{id}")

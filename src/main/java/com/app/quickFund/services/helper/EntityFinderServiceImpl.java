@@ -6,10 +6,11 @@ import com.app.quickFund.exception.custom.CustomException;
 import com.app.quickFund.repositories.*;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 @Service
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class EntityFinderServiceImpl implements EntityFinderService{
 
     private final UserRepository userRepository;

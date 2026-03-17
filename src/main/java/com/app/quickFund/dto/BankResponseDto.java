@@ -1,22 +1,22 @@
 package com.app.quickFund.dto;
 
+import com.app.quickFund.entities.BankName;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
+
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class LedgerEntryDto {
-
+public class BankResponseDto {
     private Long id;
-    private TransactionResponseDto transaction;
-    private BankAccountRequestDto bankAccount;
-    private Double amount;
-
-    private Double balanceAfterTransaction;
+    private BankName name;
+    private String ifsc;
+    private String branchCode;
     private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
 }

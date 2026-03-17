@@ -1,7 +1,7 @@
 package com.app.quickFund.controller;
 
-import com.app.quickFund.dto.BankDto;
-import com.app.quickFund.dto.UserDto;
+import com.app.quickFund.dto.BankRequestDto;
+import com.app.quickFund.dto.BankResponseDto;
 import com.app.quickFund.services.BankService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -18,25 +18,25 @@ public class BankController {
     private BankService bankService;
 
     @PostMapping("/create")
-    public ResponseEntity<BankDto> createBank(@RequestBody BankDto bankDto){
+    public ResponseEntity<BankResponseDto> createBank(@RequestBody BankRequestDto bankRequestDto){
 
-        BankDto bank = bankService.createBank(bankDto);
+        BankResponseDto bank = bankService.createBank(bankRequestDto);
         return new ResponseEntity<>(bank,HttpStatus.CREATED);
     }
     @GetMapping("/{id}")
-    public ResponseEntity<BankDto> getBankById(@PathVariable("id") Long bankId){
-        BankDto bank = bankService.getBankById(bankId);
+    public ResponseEntity<BankResponseDto> getBankById(@PathVariable("id") Long bankId){
+        BankResponseDto bank = bankService.getBankById(bankId);
         return ResponseEntity.ok(bank);
     }
     @GetMapping
-    public ResponseEntity<List<BankDto>> getAllBanks(){
-       List<BankDto> bank = bankService.getAllBanks();
+    public ResponseEntity<List<BankResponseDto>> getAllBanks(){
+       List<BankResponseDto> bank = bankService.getAllBanks();
         return ResponseEntity.ok(bank);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<BankDto> updateBank(@RequestBody BankDto bankDto,@PathVariable Long id){
-        BankDto bank = bankService.updateBank(bankDto,id);
+    public ResponseEntity<BankResponseDto> updateBank(@RequestBody BankRequestDto bankRequestDto, @PathVariable Long id){
+        BankResponseDto bank = bankService.updateBank(bankRequestDto,id);
         return ResponseEntity.ok(bank);
     }
     @DeleteMapping("/{id}")
